@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Example_3"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525"
+        Title="MainWindow" Height="480" Width="640"
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
         >
     <Window.Resources>
@@ -26,8 +26,30 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <DataTemplate x:Key="WaitingLayout">
+            <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" MinWidth="80">
+                <StackPanel HorizontalAlignment="Left">
+                    <Label Content="{Binding Description}"/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Right">
+                    <Label Content="{Binding DeliveryTime}"/>
+                </StackPanel>
+            </StackPanel>-->
+            <Grid HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition MinWidth="70"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="{Binding Description}"/>
+                    <Label Content="{Binding DeliveryTime}" Grid.Column="1"/>
+
+                </Grid>
+            
+        </DataTemplate>
     </Window.Resources>
-    <Grid>
+    <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="4*"/>
@@ -35,33 +57,31 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right">
-            <Button Content="Start Generating" Margin="0,5,5,5"/>
+            <Button Content="Start Generating" Margin="0,5,5,5" Command="{Binding StartGenerating}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" VerticalAlignment="Center" Margin="5">
             
-            <Button Content="Clear"/>
+            <Button Content="Clear" Command="{Binding Clear}"/>
             
         </StackPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1.5*"/>
-                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
-            <DockPanel LastChildFill="True">
+            <DockPanel LastChildFill="True" Margin="5">
                 <Label Content="Waiting for:" DockPanel.Dock="Top"/>
-                <ListBox MinHeight="100" DockPanel.Dock="Bottom">
-
-                </ListBox>
+                <ListBox MinHeight="100" DockPanel.Dock="Bottom" ItemsSource="{Binding Cargo}" ItemTemplate="{StaticResource WaitingLayout}"/>
             </DockPanel>
 
 
-            <DockPanel Grid.Column="1" LastChildFill="True">
+            <DockPanel Grid.Column="1" LastChildFill="True" Margin="5">
                 <Label Content="Ready:" DockPanel.Dock="Top"/>
-                <ListBox MinHeight="100" DockPanel.Dock="Bottom">
+                <ListBox Name="Ready" MinHeight="100" DockPanel.Dock="Bottom" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding ReadyCollection}" ItemTemplate="{StaticResource WaitingLayout}">
 
                 </ListBox>
             </DockPanel>
@@ -82,16 +102,17 @@
 
 
             <StackPanel Orientation="Vertical" Grid.Column="2" VerticalAlignment="Center" Margin="20">
-                <Button Content=">>"/>
+                <Button Content=">>" Command="{Binding ToDetails}" CommandParameter="{Binding ElementName=Ready, Path=SelectedItem}"/>
             
             </StackPanel>
+            
             <StackPanel Orientation="Vertical" Grid.Column="3">
                 <Label Content="Details: "/>
-                <DataGrid AutoGenerateColumns="False">
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding DetailsCollection}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Cargo Item" Width="*"/>
-                        <DataGridTextColumn Header="Weight" Width="*"/>
-                        <DataGridTextColumn Header="Amount" Width="*"/>
+                        <DataGridTextColumn Header="Cargo Item" Width="*" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Weight" Width="*" Binding="{Binding Weight}"/>
+                        <DataGridTextColumn Header="Amount" Width="*" Binding="{Binding Amount}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
