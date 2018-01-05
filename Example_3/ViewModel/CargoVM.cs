@@ -14,6 +14,11 @@ namespace Example_3.ViewModel
         public int DeliveryTime { get; set; }
         public ObservableCollection<CargoItemVM> CargoItem { get; set; }
 
+        public CargoVM()
+        {
+
+        }
+
         public CargoVM(string description, int deliveryTime, CargoItemVM item)
         {
             CargoItem = new ObservableCollection<CargoItemVM>();
