@@ -85,7 +85,7 @@ namespace Example_3.ViewModel
 
         private void StartArrayTimer()
         {
-            ArrayGenerationTimer = new Timer(StartRandomArrayGeneration, null, 0, 1000);
+            ArrayGenerationTimer = new Timer(StartRandomArrayGeneration, null, 0, 5000);
 
         }
 
@@ -94,8 +94,9 @@ namespace Example_3.ViewModel
             random = new Random();
             int randomNumber = random.Next(0, 4);
             App.Current.Dispatcher.Invoke(()=> {
-                ReadyCollection.Add(CargoArray[randomNumber]);
+                //ReadyCollection.Add(CargoArray[randomNumber]);
                 Cargo.Add(CargoArray[randomNumber]);
+
             });
             
         }
@@ -108,22 +109,22 @@ namespace Example_3.ViewModel
             CargoArray[0].AddItem(new CargoItemVM(8, 9, "Nails"));
             CargoArray[0].AddItem(new CargoItemVM(8, 9, "Hammer"));
 
-            CargoArray[1] = new CargoVM("Berlin", 5, new CargoItemVM(5, 6, "Bricks"));
+            CargoArray[1] = new CargoVM("Berlin", 2, new CargoItemVM(5, 6, "Bricks"));
             CargoArray[1].AddItem(new CargoItemVM(8, 9, "Timber"));
             CargoArray[1].AddItem(new CargoItemVM(8, 9, "Nails"));
             CargoArray[1].AddItem(new CargoItemVM(8, 9, "Hammer"));
 
-            CargoArray[2] = new CargoVM("Cape Town", 5, new CargoItemVM(5, 6, "Bricks"));
+            CargoArray[2] = new CargoVM("Cape Town", 3, new CargoItemVM(5, 6, "Bricks"));
             CargoArray[2].AddItem(new CargoItemVM(8, 9, "Timber"));
             CargoArray[2].AddItem(new CargoItemVM(8, 9, "Nails"));
             CargoArray[2].AddItem(new CargoItemVM(8, 9, "Hammer"));
 
-            CargoArray[3] = new CargoVM("Tokyo", 5, new CargoItemVM(5, 6, "Bricks"));
+            CargoArray[3] = new CargoVM("Tokyo", 1, new CargoItemVM(5, 6, "Bricks"));
             CargoArray[3].AddItem(new CargoItemVM(8, 9, "Timber"));
             CargoArray[3].AddItem(new CargoItemVM(8, 9, "Nails"));
             CargoArray[3].AddItem(new CargoItemVM(8, 9, "Hammer"));
                        
-            CargoArray[4] = new CargoVM("Shanghai", 5, new CargoItemVM(5, 6, "Bricks"));
+            CargoArray[4] = new CargoVM("Shanghai", 4, new CargoItemVM(5, 6, "Bricks"));
             CargoArray[4].AddItem(new CargoItemVM(8, 9, "Timber"));
             CargoArray[4].AddItem(new CargoItemVM(8, 9, "Nails"));
             CargoArray[4].AddItem(new CargoItemVM(8, 9, "Hammer"));

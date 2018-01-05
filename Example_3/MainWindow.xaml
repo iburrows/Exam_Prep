@@ -27,7 +27,7 @@
             </Setter>
         </Style>
 
-        <DataTemplate x:Key="WaitingLayout">
+        <DataTemplate x:Key="WaitingReadyLayout">
             <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" MinWidth="80">
                 <StackPanel HorizontalAlignment="Left">
                     <Label Content="{Binding Description}"/>
@@ -75,13 +75,13 @@
 
             <DockPanel LastChildFill="True" Margin="5">
                 <Label Content="Waiting for:" DockPanel.Dock="Top"/>
-                <ListBox MinHeight="100" DockPanel.Dock="Bottom" ItemsSource="{Binding Cargo}" ItemTemplate="{StaticResource WaitingLayout}"/>
+                <ListBox MinHeight="100" DockPanel.Dock="Bottom" ItemsSource="{Binding Cargo}" ItemTemplate="{StaticResource WaitingReadyLayout}"/>
             </DockPanel>
 
 
             <DockPanel Grid.Column="1" LastChildFill="True" Margin="5">
                 <Label Content="Ready:" DockPanel.Dock="Top"/>
-                <ListBox Name="Ready" MinHeight="100" DockPanel.Dock="Bottom" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding ReadyCollection}" ItemTemplate="{StaticResource WaitingLayout}">
+                <ListBox Name="Ready" MinHeight="100" DockPanel.Dock="Bottom" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding ReadyCollection}" ItemTemplate="{StaticResource WaitingReadyLayout}">
 
                 </ListBox>
             </DockPanel>
@@ -100,7 +100,8 @@
                 </ListBox>
             </StackPanel>-->
 
-
+<!-- Command paramter solution:
+https://stackoverflow.com/questions/18257516/how-to-pass-listbox-selecteditem-as-command-parameter-in-a-button-->
             <StackPanel Orientation="Vertical" Grid.Column="2" VerticalAlignment="Center" Margin="20">
                 <Button Content=">>" Command="{Binding ToDetails}" CommandParameter="{Binding ElementName=Ready, Path=SelectedItem}"/>
             
