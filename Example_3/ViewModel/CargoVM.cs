@@ -13,6 +13,8 @@ namespace Example_3.ViewModel
         public string Description { get; set; }
         public int DeliveryTime { get; set; }
         public ObservableCollection<CargoItemVM> CargoItem { get; set; }
+        public ObservableCollection<CargoItemVM> CargoItems { get; set; }
+
 
         public CargoVM(string description, int deliveryTime, CargoItemVM item)
         {
@@ -20,6 +22,19 @@ namespace Example_3.ViewModel
             Description = description;
             DeliveryTime = deliveryTime;
             AddItem(item);
+        }
+
+        public CargoVM(string description, int deliveryTime, ObservableCollection<CargoItemVM> items)
+        {
+            CargoItem = new ObservableCollection<CargoItemVM>();
+            Description = description;
+            DeliveryTime = deliveryTime;
+            CargoItems = items;
+        }
+
+        public CargoVM()
+        {
+
         }
 
         public void AddItem(CargoItemVM item)

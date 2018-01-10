@@ -12,6 +12,8 @@ namespace Example_3.ViewModel
         public int Amount { get; set; }
         public float Weight { get; set; }
         public string Name { get; set; }
+        
+
         public CargoItemVM(int amount, float weight, string name)
         {
             Amount = amount;
